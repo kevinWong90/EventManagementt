@@ -1,0 +1,33 @@
+<center>
+	<% if current_user.isSuper %>
+	<div>
+		<a href="/organizations">&nbsp;Show all organization</a>&nbsp;|&nbsp;<a href="/organizations/new">Register a organization</a>
+	</div>
+	<br>
+	<% end %>
+<%= form_tag organizations_delete_multiple_path, :method => :delete  do %>
+<table>
+	<thead>
+		<tr>
+			<% if current_user.isSuper %><th width="5%"><input type="checkbox" name="checkall" onclick="checkUncheckAll(this);"/></th><% end %>
+			<th width="15%">Name</th>
+			<th width="20%">Admin E-Mail</th>
+			<% if current_user.isSuper %><th width="30%"><input data-confirm="Are you sure?" name="commit" type="submit" value="Delete Selected" class="myButton2"></th><% end %>
+		</tr>
+	</thead>
+	<tbody>
+		<% for organization in @organizations %>
+		<tr>
+			<% if current_user.isSuper %><td ><%= check_box_tag "organization_ids[]", organization.id, false %></td><% end %>
+			<td ><%= link_to organization.name ,organization_path(:id => organization.id)%></td>
+			<td >
+				<% organization.organization_user_relations.select{|relation| relation.userRole == 'Admin'}.each do |admin| %>
+					<%= admin.user.email %>&nbsp;
+				<% end %>
+			</td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+<%end%>
+</center>

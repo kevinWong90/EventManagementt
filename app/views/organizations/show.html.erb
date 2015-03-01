@@ -1,0 +1,48 @@
+<center>
+	<div>
+		<a href="/organizations">&nbsp;Show all organization</a>&nbsp;|&nbsp;<a href="/organizations/new">Register a organization</a>
+	</div>
+	<br>
+
+<table>
+	<tr>
+		<td >Name: </td>
+		<td ><%= @organization.name %></td>
+	</tr>
+	<tr>
+		<td >Website: </td>
+		<td ><%= @organization.website %></td>
+	</tr>
+	<tr>
+		<td >Categories: </td>
+		<td >
+			<% if !@categories.nil? %>
+				<% for cat in @categories %>
+					#<%= cat.name %>&nbsp;
+				<% end %>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td >General Email: </td>
+		<td ><%= @organization.generalEmail %></td>
+	</tr>
+	<tr>
+		<td >Description: </td>
+		<td ><%= @organization.description %></td>
+		
+	</tr>
+	<tr>
+		<td >Admins: </td>
+		<td >
+			<% @organization.organization_user_relations.select{|relation| relation.userRole == 'Admin'}.each do |admin| %>
+				<%= admin.user.email %>&nbsp;
+			<% end %>
+		</td>
+		
+	</tr>
+
+</table> 
+</center>    
+
+

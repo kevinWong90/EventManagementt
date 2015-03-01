@@ -1,0 +1,77 @@
+<center>
+	<div>
+		<a href="/events">&nbsp;Show all Events</a>&nbsp;|&nbsp;<a href="/events/new">Create an Event</a>
+	</div>
+	<br>
+
+<%= form_for @event do |event| %>
+	<center>
+		<table>
+			<tr>
+				<td >Name: </td>
+				<td ><%= event.text_field :name %></td>
+			</tr>
+			<tr>
+				<td >Visibility: </td>
+				<td >
+					<%= select_tag "visibilityType", options_for_select(@visibilityTypes), prompt: "Select something" %>
+				</td>
+			</tr>
+			<tr>
+				<td >Categories: </td>
+				<td >
+					<%= select_tag "categoryName", options_for_select(@categoriesType), prompt: "Select something" %>
+				</td>
+			</tr>
+			<tr>
+				<td >Organization: </td>
+				<td >
+					<%= select_tag "organization_id", options_from_collection_for_select(@organizations, "id", "name"), prompt: "Select something" %>
+				</td>
+			</tr>
+			<tr>
+				<td >Event Type: </td>
+				<td >
+					<%= select_tag "eventType", options_for_select(@eventTypes), prompt: "Select something" %>
+				</td>
+			</tr>
+			<tr>
+				<td >Max Capacity: </td>
+				<td ><%= event.number_field :maxCapacity %></td>
+			</tr>
+			<tr>
+				<td >Event Start: </td>
+				<td ><%= event.datetime_select :startDate , default: Time.now%></td>
+			</tr>
+			<tr>
+				<td >Event End: </td>
+				<td ><%= event.datetime_select :endDate ,  default: Time.now%></td>
+			</tr>
+			
+			<tr>
+				<td >Country: </td>
+				<td >
+					<%= select_tag "country", options_for_select(@countries), prompt: "Select something" %>
+				</td>
+			</tr>  
+			<tr>
+				<td >Location: </td>
+				<td ><%= event.text_field :location %></td>
+			</tr>
+			<tr>
+				<td >Postal Code: </td>
+				<td ><%= event.number_field :postalCode %></td>
+			</tr>
+
+			<tr>
+				<td >Description: </td>
+				<td ><%= event.text_field :description %></td>
+			</tr>
+
+		</table>    
+		<br>
+		<input name="create" type="submit" value="Create">
+	</center>
+
+<% end %>
+</center>

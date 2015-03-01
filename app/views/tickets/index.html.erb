@@ -1,0 +1,39 @@
+<center>
+	<div>
+		<a href="/tickets/index">&nbsp;Show all current tickets</a>&nbsp;|&nbsp;<a href="/tickets/index?view_past=true">Show all past tickets</a>
+	</div>
+	<br>
+<%= form_tag tickets_delete_multiple_path, :method => :delete  do %>
+<table>
+	<thead>
+		<tr>
+			<th width="5%"><input type="checkbox" name="checkall" onclick="checkUncheckAll(this);"/></th>
+			<th >Event name</th>
+			<th >Type</th>
+			<th >Price</th>
+			<th >Quantity</th>
+			<th ><input data-confirm="Are you sure?" name="commit" type="submit" value="Delete Selected" class="myButton2"></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for t in @tickets %>
+		<tr>
+			<td ><%= check_box_tag "ticket_ids[]", t.id, false %></td>
+			<td ><%= link_to t.event.name ,tickets_show_path(:id => t.id)%></td>
+			<td ><%=t.ticketType%></td>
+			<td ><%=t.price%></td>
+			<td ><%=t.quantity%></td>
+			<td ></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+<%end%>
+
+<% if @tickets.empty? %>
+	<center>
+		<p>No result<p>
+	</center>
+<%end%>
+
+</center>

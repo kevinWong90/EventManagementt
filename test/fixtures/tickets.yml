@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  price: MyString
+  barcode: MyString
+  isClaimed: false
+  user_id: 1
+  event_id: 1
+
+two:
+  type: 
+  price: MyString
+  barcode: MyString
+  isClaimed: false
+  user_id: 1
+  event_id: 1

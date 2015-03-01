@@ -1,0 +1,8 @@
+Congratulations! Your account has been created!<br>
+<br>
+Your username: <%= @userEmail %><br>
+Your password: <% if @userPassword.length == 0 %><em>Your own password</em><% else %><%= @userPassword %><% end %><br>
+<br>
+In addition, you will be able to access your <%= @userStatus %> account through this <%= link_to 'website', @address %>.<br>
+<br><br><br>
+Regards

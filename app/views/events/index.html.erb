@@ -1,0 +1,66 @@
+<center>
+	<div>
+		<a href="/events">&nbsp;Show all Events</a>&nbsp;|&nbsp;<a href="/events/new">Create an Event</a>
+	</div>
+	<div>
+		<a href="/events">&nbsp;Show my current Events</a>&nbsp;|&nbsp;<a href="/events?view_past=true">Show my past Events</a>
+	</div>
+	<br>
+<%= form_tag events_delete_multiple_path, :method => :delete  do %>
+<table>
+	<thead>
+		<tr>
+			<th width="5%"><input type="checkbox" name="checkall" onclick="checkUncheckAll(this);"/></th>
+			<th >Event name</th>
+			<th >Category</th>
+			<th >Event Start</th>
+			<th >Event End</th>
+			<th ><input data-confirm="Are you sure?" name="commit" type="submit" value="Delete Selected" class="myButton2"></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for e in @ownEvents %>
+		<tr>
+			<td ><%= check_box_tag "event_ids[]", e.id, false %></td>
+			<td ><%= link_to e.name ,event_path(:id => e.id)%></td>
+			<td >				
+				<% categories = Category.where(:belongsTo => "Event").where(:owner_id => e.id) %>
+				<% if !categories.nil? %>
+					<% for cat in categories %>
+						#<%= cat.name %>&nbsp;
+					<% end %>
+				<% end %>
+			</td>
+			<td ><%= e.startDate %></td>
+			<td ><%= e.endDate %></td>
+			<td ></td>
+		</tr>
+		<% end %>
+		<% for e in @attendedEvents %>
+		<tr bgcolor="#e7e7e7">
+			<td ></td>
+			<td ><%= link_to e.name ,event_path(:id => e.id)%></td>
+			<td >
+				<% categories = Category.where(:belongsTo => "Event").where(:owner_id => e.id) %>
+				<% if !categories.nil? %>
+					<% for cat in categories %>
+						#<%= cat.name %>&nbsp;
+					<% end %>
+				<% end %>
+			</td>
+			<td ><%= e.startDate %></td>
+			<td ><%= e.endDate %></td>
+			<td ></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+<%end%>
+
+<% if @ownEvents.empty? && @attendedEvents.empty? %>
+	<center>
+		<p>No result<p>
+	</center>
+<%end%>
+
+</center>

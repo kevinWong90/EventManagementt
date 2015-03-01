@@ -1,0 +1,81 @@
+<center>
+
+<table>
+	<tr>
+		<td >Name: </td>
+		<td ><%= @event.name %></td>
+	</tr>
+	<tr>
+		<td >Visibility: </td>
+		<td ><%= @event.visibility %></td>
+	</tr>
+	<tr>
+		<td >Type: </td>
+		<td ><%= @event.eventType %></td>
+	</tr>
+	<tr>
+		<td >Max Seating: </td>
+		<td ><%= @event.maxCapacity %></td>
+	</tr>
+
+	<tr>
+		<td >Categories: </td>
+		<td >
+			<% if !@categories.nil? %>
+				<% for cat in @categories %>
+					#<%= cat.name %>&nbsp;
+				<% end %>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td >Start Time: </td>
+		<td ><%= @event.startDate %></td>
+	</tr>
+	<tr>
+		<td >End Time: </td>
+		<td ><%= @event.endDate %></td>
+	</tr>
+	<tr>
+		<td >Description: </td>
+		<td ><%= @event.description %></td>
+		
+	</tr>
+	<tr>
+		<td >Location: </td>
+		<td ><%= @event.location %></td>
+	</tr>
+	<tr>
+		<td >Postal Code: </td>
+		<td ><%= @event.postalCode %></td>
+	</tr>
+
+</table> 
+
+<br><br>
+
+	<%= form_tag tickets_create_path(:event_id => @event.id), :method => :post  do %>
+		<table>
+			<tr>
+				<td >Ticket Type: </td>
+				<td ><%= select_tag "ticketType", options_for_select(@ticketTypes), prompt: "Select something" %></td>
+			</tr>
+			<tr>
+				<td >Price: </td>
+				<td >
+					<%= select_tag "price", options_for_select(@pricing), prompt: "Select something" %>
+				</td>
+			</tr>
+			<tr>
+				<td >Quantity: </td>
+				<td >
+					<%= select_tag "quantity", options_for_select(@quantities), prompt: "Select something" %>
+				</td>
+			</tr>
+
+		</table>    
+		<br>
+		<input name="purchase" type="submit" value="Purchase">
+	<% end %>
+</center>    
+

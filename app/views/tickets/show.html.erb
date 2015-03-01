@@ -1,0 +1,46 @@
+<center>
+	<div>
+		<a href="/tickets/index">&nbsp;Back</a>
+	</div>
+	<br>
+			<th ></th>
+			<th >Type</th>
+			<th >Price</th>
+			<th >Quantity</th>
+<% if !@ticket.nil? %>
+<table>
+	<tr>
+		<td >Event name: </td>
+		<td ><%= link_to @ticket.event.name , event_path(:id => @ticket.event.id)%></td>
+	</tr>
+	<tr>
+		<td >Event start: </td>
+		<td ><%= @ticket.event.startDate %></td>
+	</tr>
+	<tr>
+		<td >Event end: </td>
+		<td ><%= @ticket.event.endDate %></td>
+	</tr>
+	<tr>
+		<td >Ticket Type: </td>
+		<td ><%= @ticket.ticketType %></td>
+	</tr>
+	<tr>
+		<td >Ticket Price: </td>
+		<td ><%= @ticket.price %></td>
+	</tr>
+	<tr>
+		<td >Ticket Quantity: </td>
+		<td ><%= @ticket.quantity %></td>
+	</tr>
+	<tr>
+		<td >Ticket Code: </td>
+		<td ><%= @ticket.barcode %></td>
+		
+	</tr>
+
+</table> 
+<%end%>
+</center>    
+
+

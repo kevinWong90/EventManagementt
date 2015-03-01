@@ -1,0 +1,49 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+/*Styling for alert/notice/error/success message box */
+.alert-box {
+  color:#555;
+  border-radius:10px;
+  font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
+  padding:10px 5px 10px 5px;
+  margin-left: auto;
+  margin-right: auto;
+  position:absolute;
+  bottom:0;
+  z-index: 100000;
+  width:90%;
+}
+.alert-box span {
+  font-weight:bold;
+  text-transform:uppercase;
+  text-align: center;
+}
+.error {
+  background:#f5aca6;
+  border:1px solid #f5aca6;
+}
+.success {
+  background:#a7cb8b;
+  border:1px solid #a6ca8a;
+}
+.warning {
+  background:#f3c889;
+  border:1px solid #f2c779;
+}
+.notice {
+  background:#9edaf7;
+  border:1px solid #8ed9f6;
+}
+/* Alert box styling end */

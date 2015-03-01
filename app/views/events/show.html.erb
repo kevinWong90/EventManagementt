@@ -1,0 +1,95 @@
+<center>
+	<div>
+		<a href="/events">&nbsp;Show all Events</a>&nbsp;|&nbsp;<a href="/events/new">Create an Event</a>
+	</div>
+	<br>
+
+<table>
+	<tr>
+		<td >Name: </td>
+		<td ><%= @event.name %></td>
+	</tr>
+	<tr>
+		<td >Visibility: </td>
+		<td ><%= @event.visibility %></td>
+	</tr>
+	<tr>
+		<td >Type: </td>
+		<td ><%= @event.eventType %></td>
+	</tr>
+	<tr>
+		<td >Max Seating: </td>
+		<td ><%= @event.maxCapacity %></td>
+	</tr>
+
+	<tr>
+		<td >Categories: </td>
+		<td >
+			<% if !@categories.nil? %>
+				<% for cat in @categories %>
+					#<%= cat.name %>&nbsp;
+				<% end %>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td >Start Time: </td>
+		<td ><%= @event.startDate %></td>
+	</tr>
+	<tr>
+		<td >End Time: </td>
+		<td ><%= @event.endDate %></td>
+	</tr>
+	<tr>
+		<td >Description: </td>
+		<td ><%= @event.description %></td>
+		
+	</tr>
+	<tr>
+		<td >Location: </td>
+		<td ><%= @event.location %></td>
+	</tr>
+	<tr>
+		<td >Postal Code: </td>
+		<td ><%= @event.postalCode %></td>
+	</tr>
+
+</table> 
+<% if !@tickets.nil?%>
+	<b><p>Ticket Purchase Records</p></b>
+	<%= form_tag tickets_delete_multiple_path, :method => :delete  do %>
+	<table>
+		<thead>
+			<tr>
+				<th width="5%"><input type="checkbox" name="checkall" onclick="checkUncheckAll(this);"/></th>
+				<th >Buyer email</th>
+				<th >Type</th>
+				<th >Price</th>
+				<th >Quantity</th>
+				<th ><input data-confirm="Are you sure?" name="commit" type="submit" value="Delete Selected" class="myButton2"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for t in @tickets %>
+			<tr>
+				<td ><%= check_box_tag "ticket_ids[]", t.id, false %></td>
+				<td ><%= t.user.email %></td>
+				<td ><%=t.ticketType%></td>
+				<td ><%=t.price%></td>
+				<td ><%=t.quantity%></td>
+				<td ></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<%end%>
+
+	<% if @tickets.empty? %>
+		<center>
+			<p>No result<p>
+		</center>
+	<%end%>
+<%end%>
+</center>    
+
+

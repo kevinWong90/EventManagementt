@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EventManagment</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<ul>
+    <%if user_signed_in? %>
+      <%if current_user.isSuper %>
+        <% if @title=="Home" %>
+          <li class="active"><%= link_to "Home",home_index_path, :class => "active" %></li>
+        <% else %>
+          <li><%= link_to "Home",home_index_path %></li>
+        <% end %>
+
+        <% if @title=="Organization" %>
+          <li class="active"><%= link_to "Organizations", organizations_path, :class => "active" %></li>
+        <% else %>
+          <li><%= link_to "Organizations", organizations_path %></li>
+        <% end %>
+
+    <%else%>
+      <% if @title=="Home" %>
+        <li class="active"><%= link_to "Home",home_index_path, :class => "active"  %></li>
+      <% else %>
+        <li><%= link_to "Home",home_index_path %></li>
+      <% end %>
+      
+      <% if @title=="Organization" %>
+        <li class="active"><%= link_to "My Organizations", organizations_path, :class => "active" %></li>
+      <% else %>
+        <li><%= link_to "My Organizations", organizations_path %></li>
+      <% end %>
+      <% if @title=="Event" %>
+        <li class="active"><%= link_to "My Events",events_path, :class => "active"  %></li>
+      <% else %>
+        <li ><%= link_to "My Events",events_path %></li>
+      <% end %>
+
+      <% if @title=="Ticket" %>
+        <li class="active"><%= link_to "My Tickets",tickets_index_path, :class => "active"  %></li>
+      <% else %>
+        <li ><%= link_to "My Tickets",tickets_index_path %></li>
+      <% end %>
+    <%end%>
+  <%end%>
+<div style="float: right;">
+	<% if user_signed_in? %>
+      Signed in as <%= current_user.email %>
+      &nbsp;|&nbsp;<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+  <% else %>
+      <%= link_to "Sign up", new_user_registration_path %> or
+      <%= link_to "Sign in", new_user_session_path %>
+  <% end %>
+</div>
+<br><br>
+<%= yield %>
+  
+  <% if flash[:success] %>
+    <div class="alert-box success"><span>success: </span><%= flash[:success].html_safe %></div>
+  <%end%>
+  <%if flash[:notice] %>
+    <div class="alert-box notice"><span>notice: </span><%= flash[:notice].html_safe %></div>
+  <% end %>
+  <% if flash[:error] %>
+    <div class="alert-box error"><span>error: </span><%= flash[:error].html_safe %></div>
+  <% end %>
+  <% if flash[:alert] %>
+    <div class="alert-box warning"><span>warning: </span><%= flash[:alert].html_safe %></div>
+  <% end %>
+
+</body>
+</html>

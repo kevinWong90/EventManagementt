@@ -1,0 +1,35 @@
+
+
+<table>
+	<thead>
+		<tr>
+			<th width="5%">Event Name</th>
+			<th width="15%">Event Category</th>
+			<th width="20%">Start Time</th>
+			<th width="30%">End Time</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for event in @events %>
+			<tr>
+				<td ><%= link_to event.name ,events_visitor_page_path(:id => event.id)%></td>
+				<td >	
+					<% categories = Category.where(:belongsTo => "Event").where(:owner_id => event.id) %>
+					<% if !categories.nil? %>
+						<% for cat in categories %>
+							#<%= cat.name %>&nbsp;
+						<% end %>
+					<% end %>
+				</td>
+				<td ><%= event.startDate %></td>
+				<td ><%= event.endDate %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+<br>
+<% if @events.empty? %>
+	<center>
+		<p>No result<p>
+	</center>
+<%end%>

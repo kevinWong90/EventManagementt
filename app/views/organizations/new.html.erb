@@ -1,0 +1,43 @@
+<center>
+	<div>
+		<a href="/organizations">&nbsp;Show all organization</a>&nbsp;|&nbsp;<a href="/organizations/new">Register a organization</a>
+	</div>
+	<br>
+
+<%= form_for @organization do |organization| %>
+	<center>
+		<table>
+			<tr>
+				<td >Name: </td>
+				<td ><%= organization.text_field :name%></td>
+			</tr>
+			<tr>
+				<td >Website: </td>
+				<td ><%= organization.text_field :website %></td>
+			</tr>
+			<tr>
+				<td >Categories: </td>
+				<td >
+					<%= select_tag "categoryName", options_for_select(@categoriesType), prompt: "Select something" %>
+				</td>
+			</tr>
+			<tr>
+				<td >General Email: </td>
+				<td ><%= organization.text_field :generalEmail %></td>
+			</tr>
+			<tr>
+				<td >Description: </td>
+				<td ><%= organization.text_field :description %></td>
+				
+			</tr>
+			<tr>
+				<td >Add an Admin email: </td>
+				<td ><%= email_field_tag :userEmail %></td>
+			</tr>
+		</table>    
+		<br>
+		<input name="create" type="submit" value="Create">
+	</center>
+
+<% end %>
+</center>
